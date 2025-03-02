@@ -30,6 +30,7 @@ A complete reference guide to Git and GitHub with all essential commands, concep
   - [Advanced Git Commands](#advanced-git-commands)
 - [Git Workflows](#git-workflows)
 - [Common Git Problems and Solutions](#common-git-problems-and-solutions)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 - [Additional Resources](#additional-resources)
 
 ## What Is Git & GitHub? 💻🌐
@@ -573,7 +574,7 @@ git pull --rebase
 git pull [remote] [branch]
 ```
 
-### Git Stash Commands
+### Git Stash Commands 📦
 
 ```bash
 # Save changes to a temporary area (stash)
@@ -610,7 +611,7 @@ git stash branch [branch-name] stash@{n}
 git stash show stash@{n}
 ```
 
-### Advanced Git Commands
+### Advanced Git Commands 🧠
 
 ```bash
 # Create a lightweight tag
@@ -654,7 +655,7 @@ git bisect good [commit-id]  # Known good commit
 # Git will help you find the commit that introduced the bug
 ```
 
-## Git Workflows
+## Git Workflows 🔄
 
 ### Basic Git Workflow
 
@@ -667,7 +668,7 @@ git bisect good [commit-id]  # Known good commit
 7. Create pull request (on GitHub/GitLab/Bitbucket)
 8. Merge pull request after review
 
-### Feature Branch Workflow
+### Feature Branch Workflow 🌱
 
 1. Create a feature branch from main/master
    ```bash
@@ -690,7 +691,7 @@ git bisect good [commit-id]  # Known good commit
    git push
    ```
 
-### Gitflow Workflow
+### Gitflow Workflow 🌊
 
 1. Maintain two primary branches:
 
@@ -720,7 +721,7 @@ git bisect good [commit-id]  # Known good commit
    - Releases → `main` and `develop`
    - Hotfixes → `main` and `develop`
 
-## Common Git Problems and Solutions
+## Common Git Problems and Solutions 🛠️
 
 ### Reverting a Pushed Commit
 
@@ -740,7 +741,7 @@ git reflog
 git checkout -b <branch-name> <sha>
 ```
 
-### Fixing Merge Conflicts
+### Fixing Merge Conflicts ⚔️
 
 1. Run `git status` to see conflicted files
 2. Open conflicted files and resolve conflicts manually
@@ -775,6 +776,87 @@ git checkout <original-branch>
 git reset --hard <hash-before-commits>
 ```
 
+## Frequently Asked Questions (FAQ) ❓
+
+### Git Basics
+
+#### Q: What's the difference between Git and GitHub? 🤔
+**A:** Git is a version control system that manages your code history locally. GitHub is a cloud-based hosting service for Git repositories, providing collaboration features like pull requests, issues, and code reviews.
+
+#### Q: Do I need to know command line to use Git? 💻
+**A:** While command line provides the full power of Git, you can use GUI tools like GitHub Desktop, GitKraken, or SourceTree for most common operations without knowing command line commands.
+
+#### Q: How do I undo my last commit? ↩️
+**A:** If you haven't pushed the commit, use `git reset HEAD~1` to undo the commit but keep changes, or `git reset --hard HEAD~1` to completely discard the commit and its changes.
+
+### Repository Management
+
+#### Q: What's the best branching strategy for my project? 🌿
+**A:** It depends on your team size and project needs:
+- Small teams: Feature branch workflow
+- Larger teams with regular releases: Gitflow
+- Continuous deployment: Trunk-based development with feature flags
+
+#### Q: How do I keep my fork updated with the original repository? 🔄
+**A:**
+```bash
+# Add the original repository as an upstream remote
+git remote add upstream https://github.com/original-owner/original-repository.git
+
+# Fetch the changes
+git fetch upstream
+
+# Merge the changes into your local branch
+git merge upstream/main
+```
+
+### Troubleshooting
+
+#### Q: What should I do when I get merge conflicts? ⚠️
+**A:** Merge conflicts happen when Git can't automatically merge changes. To resolve:
+1. Run `git status` to see conflicted files
+2. Edit the files to resolve conflicts (remove conflict markers)
+3. Add resolved files with `git add <filename>`
+4. Complete the merge with `git commit`
+
+#### Q: I accidentally committed sensitive information, how do I remove it? 🔒
+**A:**
+```bash
+# If not pushed yet, amend the last commit
+git rm --cached sensitive-file
+git commit --amend
+
+# If already pushed, you'll need BFG Repo-Cleaner or git-filter-repo 
+# and to force push (requires special handling)
+```
+
+### Advanced Usage
+
+#### Q: What's a good commit message format? 📝
+**A:** A good format is:
+```
+feat(component): add login functionality
+
+Implement user authentication with OAuth2.
+Resolves: #123
+```
+Elements:
+- Type: feat, fix, docs, style, refactor, test, chore
+- Scope: what part of code is affected
+- Short summary (imperative mood)
+- Optional detailed description
+- Optional references to issues
+
+#### Q: How can I squash multiple commits into one? 🔨
+**A:**
+```bash
+# Interactive rebase to the commit before the ones you want to squash
+git rebase -i HEAD~3  # To squash last 3 commits
+
+# In the editor, change "pick" to "squash" for commits you want to combine
+# Save and provide a new commit message
+```
+
 ## Additional Resources 📚
 
 - [Official Git Documentation](https://git-scm.com/doc)
@@ -784,7 +866,12 @@ git reset --hard <hash-before-commits>
 - [Interactive Git Branching Tutorial](https://learngitbranching.js.org/)
 - [Git Flight Rules](https://github.com/k88hudson/git-flight-rules)
 - [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
+- [Oh Shit, Git!?!](https://ohshitgit.com/) - Practical solutions for common Git mistakes
+- [GitHub Skills](https://skills.github.com/) - Interactive GitHub learning courses
+- [Git Visual Cheat Sheet](http://ndpsoftware.com/git-cheatsheet.html) - Visual representation of Git commands
 
 ---
 
-Feel free to contribute to this repository by submitting pull requests or opening issues! 🚀
+Feel free to contribute to this repository by submitting pull requests or opening issues! 🚀 
+
+If you found this guide helpful, consider giving it a ⭐ star!
